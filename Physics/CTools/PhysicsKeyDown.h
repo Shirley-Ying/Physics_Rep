@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "InputCoreTypes.h"
 #include "PhysicsKeyDown.generated.h"
 
 UCLASS()
@@ -24,6 +25,9 @@ public:
 	void ResetTimer();
 
 	UPROPERTY(BlueprintReadOnly, EditInstanceOnly)
+	FKey DownKey = FKey("1"); 
+	
+	UPROPERTY(BlueprintReadOnly, EditInstanceOnly)
 	AActor* PushActor = nullptr;
 
 	UPROPERTY(BlueprintReadWrite, EditInstanceOnly)
@@ -38,6 +42,8 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	USceneComponent* TransComponent = nullptr;
 
+	UPROPERTY(BlueprintReadOnly, EditInstanceOnly)
+	bool bUseAccel = true;
 private:
 	bool bPushed = false;
 	

@@ -22,7 +22,7 @@ void APhysicsKeyDown::BeginPlay()
 	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(),0);
 	if(PC && PC->InputComponent) {
 		auto InputCmp = PC->InputComponent;
-		InputCmp->BindKey(EKeys::One, IE_Pressed, this, &APhysicsKeyDown::StartPush);
+		InputCmp->BindKey(DownKey, IE_Pressed, this, &APhysicsKeyDown::StartPush);
 	}
 }
 
@@ -39,7 +39,7 @@ void APhysicsKeyDown::Tick(float DeltaTime)
 				FTransform TargetTransform = PushActor->GetTransform();
 				FRotator TargetRot = TargetTransform.TransformRotation(ForceDirection.Rotation().Quaternion()).Rotator();
 				FVector ForceDirFix = TargetRot.Vector();
-				MeshCmp->AddForce(PushForceSize * ForceDirFix, NAME_None, true);
+				MeshCmp->AddForce(PushForceSize * ForceDirFix, NAME_None, bUseAccel);
 			}
 		}
 	}
